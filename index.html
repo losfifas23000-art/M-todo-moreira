@@ -106,37 +106,17 @@
     margin-bottom: 25px;
   }
 
-  .server-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: rgba(255, 255, 255, 0.1);
+  /* Estilos para el mensaje de Versión Paga */
+  .locked-message {
+    color: #ccc;
+    font-size: 18px;
+    padding: 30px 10px;
+    border: 1px dashed #444;
     border-radius: 10px;
-    margin: 8px 0;
-    padding: 10px 15px;
-    transition: 0.3s;
   }
 
-  .server-item:hover {
-    background: rgba(255, 255, 255, 0.2);
-  }
-
-  .server-item span {
-    font-size: 16px;
-  }
-
-  .join-btn {
-    background-color: #ff4747;
-    border: none;
-    border-radius: 8px;
-    color: white;
-    padding: 8px 15px;
-    cursor: pointer;
-    transition: 0.3s;
-  }
-
-  .join-btn:hover {
-    background-color: #ff0000;
+  .server-item {
+    display: none; /* Ocultamos los items originales para esta versión */
   }
 
 </style>
@@ -152,12 +132,16 @@
 <button class="go-btn" onclick="goToRandomServer()">Go to Server</button>
 
 <div class="live-servers" id="liveServers">
-  <h3>💻 SERVERS EN VIVO</h3>
-  <div id="serversList"></div>
+  <h3>💻 SERVERS EN VIVO (VERSIÓN PAGA) 🔒</h3>
+  
+  <div id="serversList" class="locked-message">
+    Acceso restringido. Esta función solo está disponible para usuarios de la versión paga.
+  </div>
+
 </div>
 
 <script>
-  // 🔹 Lista de servidores
+  // 🔹 Lista de servidores (La lista completa se mantiene para los enlaces del botón "Go to Server")
   const servers = [
     "https://www.roblox.com/share?code=cd3678ebc5c98b4fadc070577b580311&type=Server",
     "https://www.roblox.com/share?code=8c962249378ada48978d11d45f15ca9d&type=Server",
@@ -181,7 +165,6 @@
     "https://www.roblox.com/share?code=0c6c1de9a223644786cca5a35afb0713&type=Server",
     "https://www.roblox.com/share?code=8db4a426e6971048bd83f282120431f0&type=Server",
     "https://www.roblox.com/share?code=a77e1624c7d17a4989132321718ed842&type=Server",
-    // NUEVOS LINKS AGREGADOS
     "https://www.roblox.com/share?code=515ced9c36d00342a7e6ff53665e788e&type=Server",
     "https://www.roblox.com/share?code=fcc4676f99b60146b48fe843cd36049e&type=Server",
     "https://www.roblox.com/share?code=c90dc902462afe41b05e96d96992782f&type=Server",
@@ -205,16 +188,13 @@
     "https://www.roblox.com/share?code=38a497a2d2e70a4286f7a23b61e28802&type=Server"
   ];
 
-  // 🔹 Brainrots con tiempos aleatorios (RUTAS RELATIVAS MODIFICADAS)
+  // 🔹 Brainrots con tiempos aleatorios (Lista reducida)
   const brainrots = [
     { name: "Los Bros", img: "./img/bros.png", min: [10, 20] },
     { name: "Las Sis", img: "./img/las_sis.png", min: [12, 25] },
     { name: "Celularsini Viciosini", img: "./img/celularsini.png", min: [15, 30] },
-    { name: "Garama & Mandundung", img: "./img/garamadundung.png", min: [18, 33] },
-    { name: "Spaghetti Tualetti", img: "./img/spaghettitualetti.png", min: [20, 34] },
-    { name: "Secret Combinación", img: "./img/secretcombinacion.png", min: [25, 38] },
-    { name: "Dragon Cannelloni", img: "./img/dragoncanneloni.png", min: [30, 40] },
-    { name: "Burguru & Fryuru", img: "./img/burgurufryuru.png", min: [28, 38] }
+    { name: "Spaghetti Tualetti", img: "./img/spaghettitualetti.png", min: [20, 34] }
+    // Burguru & Fryuru eliminado
   ];
 
   const container = document.getElementById("brainrots");
@@ -244,37 +224,7 @@
     window.open(randomLink, "_blank");
   }
 
-  // 🔹 SERVERS EN VIVO
-  const allServers = [
-    { name: "Los Combinacionas", base: 15 },
-    { name: "Graipuss Medussi", base: 2 },
-    { name: "67", base: 7 },
-    { name: "La Grande Combinación", base: 10 },
-    { name: "Ketchuru and Mosturu", base: 42 },
-    { name: "Los Tralaleritos", base: 3 },
-    { name: "Las Tralaleritas", base: 4 },
-    { name: "Quesadilla Cocodrila", base: 8 },
-    { name: "Los Noooo My Hotspotsitos", base: 5.5 }
-  ];
-
-  const serversList = document.getElementById("serversList");
-  const multipliers = [1, 2, 4, 6, 10];
-
-  allServers.forEach(s => {
-    const chance = Math.random();
-    if (chance > 0.5 || (s.base > 15 && chance < 0.8)) {
-      const mult = multipliers[Math.floor(Math.random() * multipliers.length)];
-      const finalValue = (s.base * mult).toFixed(1);
-      const item = document.createElement("div");
-      item.classList.add("server-item");
-      item.innerHTML = `<span>${s.name}</span><span>${finalValue}M/S</span><button class="join-btn">Unirse</button>`;
-      item.querySelector(".join-btn").onclick = () => {
-        const randomLink = servers[Math.floor(Math.random() * servers.length)];
-        window.open(randomLink, "_blank");
-      };
-      serversList.appendChild(item);
-    }
-  });
+  // Se elimina toda la lógica de SERVERS EN VIVO, dejando el mensaje estático
 </script>
 
 </body>
