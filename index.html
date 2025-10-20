@@ -5,32 +5,28 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Moreira Method — Beta Phase</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Creepster&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
-  /* --- HALLOWEEN STYLES --- */
+  /* --- REVERTED STYLES --- */
   body {
-    /* Fondo de Calabaza a Noche */
-    background: linear-gradient(135deg, #000000 0%, #4d2600 100%); 
+    background: linear-gradient(135deg, #000000, #202020); /* Estilo Oscuro Original */
     color: white;
     font-family: 'Poppins', sans-serif;
     text-align: center;
     padding: 40px;
-    /* Extra: Añadir un pequeño efecto de textura si tienes una imagen de telaraña */
-    /* background-image: url('./img/cobweb.png'); */ 
   }
 
   h1 {
-    font-family: 'Creepster', cursive; /* Fuente Spooky */
-    font-size: 60px;
-    color: #ff8c00; /* Naranja Calabaza */
-    text-shadow: 0 0 10px #00ff00, 0 0 20px rgba(0, 255, 0, 0.4); /* Sombra Verde Neón */
+    font-size: 42px;
+    color: #ff4747; /* Rojo Original */
+    text-shadow: 0 0 15px #ff0000;
     margin-bottom: 5px;
   }
 
   h2 {
-    font-size: 24px;
-    color: #ffd700; /* Amarillo Oro */
+    font-size: 20px;
+    color: #999;
     margin-top: 0;
     margin-bottom: 40px;
   }
@@ -44,7 +40,7 @@
   }
 
   .brainrot {
-    background: rgba(139, 69, 19, 0.15); /* Marrón oscuro semitransparente */
+    background: rgba(255, 255, 255, 0.1);
     border-radius: 15px;
     width: 260px;
     padding: 15px;
@@ -58,7 +54,7 @@
   }
 
   .brainrot:hover {
-    background: rgba(139, 69, 19, 0.4);
+    background: rgba(255, 255, 255, 0.25);
     transform: scale(1.05);
   }
 
@@ -67,7 +63,7 @@
     height: 70px;
     border-radius: 10px;
     margin-bottom: 10px;
-    border: 2px solid #ff8c00; /* Borde naranja para las imágenes */
+    border: none; /* Quitamos el borde temático */
   }
 
   .brainrot span {
@@ -76,59 +72,58 @@
   }
 
   .time {
-    color: #00ff00; /* Verde Neón */
-    font-size: 16px;
-    font-weight: 700;
+    color: #ff4747; /* Rojo Original */
+    font-size: 14px;
+    font-weight: normal;
   }
 
   .brainrot.selected {
-    border: 3px solid #00ff00; /* Borde de Selección Verde Fantasma */
-    background: rgba(0, 255, 0, 0.1);
-    box-shadow: 0 0 15px #00ff00, 0 0 20px rgba(0, 255, 0, 0.5);
+    border: 2px solid #ff4747;
+    background: rgba(255, 0, 0, 0.2);
+    box-shadow: 0 0 15px #ff4747;
   }
 
   .go-btn {
     margin-top: 40px;
-    background-color: #ff8c00; /* Botón Naranja */
-    color: black;
-    border: 3px solid #ff0000; /* Borde Rojo Sangre */
+    background-color: #ff4747;
+    color: white;
+    border: none;
     padding: 15px 40px;
     font-size: 22px;
     border-radius: 10px;
     cursor: pointer;
     transition: 0.3s;
-    font-weight: 700;
   }
 
   .go-btn:hover {
-    background-color: #ff6600;
-    box-shadow: 0 0 20px #ff8c00;
+    background-color: #ff0000;
+    box-shadow: 0 0 20px #ff4747;
   }
 
   .live-servers {
     margin-top: 60px;
-    background: rgba(0, 0, 0, 0.6);
+    background: rgba(255, 255, 255, 0.08);
     border-radius: 15px;
     padding: 25px;
-    border: 2px solid #ff8c00; /* Borde Naranja */
+    border: none; /* Quitamos el borde temático */
   }
 
   .live-servers h3 {
-    font-family: 'Creepster', cursive;
-    color: #00ff00; /* Título de Servidores Verde Neón */
-    text-shadow: 0 0 5px #00ff00;
+    font-family: 'Poppins', sans-serif; /* Volvemos a la fuente original */
+    color: #ff4747;
+    text-shadow: 0 0 10px #ff0000;
     margin-bottom: 25px;
-    font-size: 30px;
+    font-size: 20px;
   }
 
   /* Estilos para el mensaje de Versión Paga (Locked) */
   .locked-message {
-    color: #ff8c00; /* Texto de bloqueo Naranja */
+    color: #ccc;
     font-size: 18px;
     padding: 30px 10px;
-    border: 1px dashed #ff0000; /* Borde punteado Rojo */
+    border: 1px dashed #444; /* Volvemos a color oscuro/neutro */
     border-radius: 10px;
-    background-color: rgba(255, 0, 0, 0.1); /* Fondo Rojo sutil */
+    background-color: transparent; /* Fondo transparente */
   }
 
 </style>
@@ -200,13 +195,14 @@
     "https://www.roblox.com/share?code=38a497a2d2e70a4286f7a23b61e28802&type=Server"
   ];
 
-  // 🔹 Brainrots with random times (Reduced list)
+  // 🔹 Brainrots with random times (New element added)
   const brainrots = [
     { name: "The Bros", img: "./img/bros.png", min: [10, 20] },
     { name: "The Sis", img: "./img/las_sis.png", min: [12, 25] },
     { name: "Cellphonesini Viciousini", img: "./img/celularsini.png", min: [15, 30] },
-    { name: "Spaghetti Toilet", img: "./img/spaghettitualetti.png", min: [20, 34] }
-    // All others eliminated
+    { name: "Spaghetti Toilet", img: "./img/spaghettitualetti.png", min: [20, 34] },
+    // NUEVO: Esok Eskola
+    { name: "Esok Eskola", img: "./img/esok.png", min: [22, 36] } 
   ];
 
   const container = document.getElementById("brainrots");
@@ -219,7 +215,7 @@
     const div = document.createElement("div");
     div.classList.add("brainrot");
     
-    // Use translated names and time
+    // Use names and time
     div.innerHTML = `<img src="${b.img}" alt="${b.name}"><span>${b.name}</span><p class="time">⏱ ${randomTime} min</p>`;
     
     // Add click event
